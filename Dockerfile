@@ -1,7 +1,7 @@
 # Use the official Node.js image
 FROM node:14
 
-# Set the working directory
+# Set the working directory for your apps
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json
@@ -16,5 +16,5 @@ COPY . .
 # Expose the port the app runs on
 EXPOSE 3000
 
-# Command to run the application
+# Command to run the application use by anyone
 CMD ["node", "app.js"]
