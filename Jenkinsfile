@@ -2,7 +2,7 @@ pipeline {
     agent any 
 
     environment {
-        AWS_ACCOUNT_ID = 593664963477
+        AWS_ACCOUNT_ID = '593664963477'
         AWS_REGION = 'us-east-1'
         ECR_REPOSITORY = 'my-node-app'
         ECS_CLUSTER = 'NODEJS_CLUSTER'
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     sh "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
-                    sh 'docker build -t ${ECR_REPOSITORY}:latest .'
+                    sh "docker build -t ${ECR_REPOSITORY}:latest ."
                 }
             }
         }
