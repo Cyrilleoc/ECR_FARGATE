@@ -9,6 +9,7 @@ pipeline {
         ECS_SERVICE = 'FrontenNodjsAPP02' // Change to your ECS service name
         TASK_DEFINITION = 'MyNodeApp' // Change to your task definition name
         ECS_URL = 'https://us-east-1.console.aws.amazon.com/ecs/v2/clusters?region=us-east-1'
+        // remember to add the ecs url
     }
     
     stages {
