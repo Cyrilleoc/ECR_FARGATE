@@ -61,7 +61,9 @@ pipeline {
                     // Register new task definition
                     def newTaskDefResponse = sh(script: "aws ecs register-task-definition --cli-input-json '${newTaskDef}'", returnStdout: true)
                     def newTaskDefArn = readJSON(text: newTaskDefResponse).taskDefinition.taskDefinitionArn
-
+                    
+                     // Adding these line to fix bugs, Use the writeJSON step to create a properly formatted JSON file
+                    
                     def taskDefJson = readJSON text: sh(script: "aws ecs describe-task-definition --task-definition MyNodeApp", returnStdout: true).trim()
                     def updatedTaskDef = taskDefJson.taskDefinition updatedTaskDef.containerDefinitions[0].image = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:latest"
 
