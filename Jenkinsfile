@@ -67,7 +67,7 @@ pipeline {
                     sh "aws ecs register-task-definition --cli-input-json file://updated-task-def.json"
                     
                     // Update service to use new task definition
-                    sh "aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --force-new-deployment --task-definition ${newTaskDefArn}"
+                    sh "aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --force-new-deployment --task-definition ${TASK_DEFINITION}"
                 }
             }
         }
