@@ -43,7 +43,7 @@ pipeline {
                     def taskDef = readJSON(text: taskDefJson).taskDefinition
 
                     taskDef.containerDefinitions.each { containerDef ->
-                        containerDef.image = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:latest"
+                        containerDef.image = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:latest".toString()
                     }
 
                     taskDef.remove('taskDefinitionArn')
@@ -55,6 +55,8 @@ pipeline {
                     taskDef.remove('registeredBy')
 
                     writeJSON file: 'updated-task-def.json', json: taskDef
+
+                    sh "cat updated-task-def.json"
 
                     def newTaskDefResponse = sh(script: "aws ecs register-task-definition --cli-input-json file://updated-task-def.json", returnStdout: true).trim()
                     def newTaskDefArn = readJSON(text: newTaskDefResponse).taskDefinition.taskDefinitionArn
